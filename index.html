@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barbearia Rocha | Reserve seu horário</title>
+<meta name="description" content="Corte, barba e navalha com hora marcada. Veja os horários livres e reserve em segundos pelo WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F2A33;--ink2:#17404F;--latao:#C9A45C;--papel:#F5F4F0;--texto:#14232B;--cinza:#5F7078;--linha:#D8DCDB;--alerta:#B4412F}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Jost',system-ui,sans-serif;background:var(--papel);color:var(--texto);line-height:1.6;font-size:1.05rem}
+h1,h2,h3{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;line-height:1.12;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+section{padding:72px 0;scroll-margin-top:12px}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:12px}
+.sub{color:var(--cinza);margin:0 0 36px;max-width:52ch}
+:focus-visible{outline:3px solid var(--latao);outline-offset:3px}
+.btn{display:inline-block;background:var(--latao);color:var(--ink);font:600 1rem 'Jost',sans-serif;padding:14px 26px;border-radius:2px;text-decoration:none;border:0;cursor:pointer;text-align:center}
+.btn:hover{background:#D9B56D}
+.btn.vazado{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+.btn.vazado:hover{border-color:var(--latao);color:var(--latao)}
+
+.aviso{background:var(--latao);color:var(--ink);text-align:center;padding:9px 16px;font-size:.95rem}
+.hero{background:var(--ink);color:#fff;padding:72px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.5rem,6vw,4.2rem);font-weight:700}
+.hero p{color:#C6D3D8;max-width:36ch;margin:20px 0 28px;font-size:1.15rem}
+.acoes{display:flex;gap:12px;flex-wrap:wrap}
+.prova{margin-top:28px;color:#9FB2B9;font-size:.95rem}
+.prova b{color:var(--latao)}
+.agenda{border:1px solid var(--latao);outline:1px solid rgba(201,164,92,.35);outline-offset:6px;padding:28px;background:var(--ink2)}
+.agenda h2{font-size:1.5rem;margin:0 0 4px}
+.agenda p{margin:0 0 16px;color:#C6D3D8;font-size:1rem;max-width:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:500 1rem 'Jost',sans-serif;padding:9px 16px;border:1.5px solid var(--latao);background:transparent;color:inherit;border-radius:2px;cursor:pointer}
+.chip:hover:not(:disabled){background:var(--latao);color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--latao);color:var(--ink)}
+.chip:disabled{opacity:.4;text-decoration:line-through;cursor:not-allowed;border-color:var(--linha)}
+.escassez{margin:16px 0 0!important;color:#F0B7A8!important;font-weight:500}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.card{background:#fff;border:1px solid var(--linha);padding:32px 28px;display:flex;flex-direction:column;position:relative}
+.card.destaque{border:2px solid var(--ink);box-shadow:0 14px 34px rgba(15,42,51,.14)}
+.selo{position:absolute;top:-13px;left:24px;background:var(--ink);color:var(--latao);font-weight:600;font-size:.85rem;padding:4px 12px}
+.card h3{font-size:1.5rem}
+.preco{font-size:2.2rem;font-family:'Bodoni Moda',serif;margin:14px 0 2px}
+.preco small{font:400 1rem 'Jost',sans-serif;color:var(--cinza)}
+.de{color:var(--cinza);text-decoration:line-through;font-size:.95rem;margin:0}
+.eco{color:#2F6B4F;font-weight:600;font-size:.95rem;margin:0}
+.card ul{padding-left:18px;margin:16px 0 24px;color:var(--cinza)}
+.card .btn{margin-top:auto;background:var(--ink);color:#fff}
+.card.destaque .btn{background:var(--latao);color:var(--ink)}
+
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;counter-reset:p}
+.passos div{border-top:2px solid var(--ink);padding-top:16px}
+.passos h3{font-size:1.25rem;margin-bottom:6px}
+.passos p{margin:0;color:var(--cinza)}
+.escuro{background:var(--ink);color:#fff}
+.escuro .sub{color:#9FB2B9}
+.falas{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+blockquote{margin:0;padding-left:18px;border-left:2px solid var(--latao)}
+blockquote p{margin:0 0 10px;font-family:'Bodoni Moda',serif;font-size:1.15rem;line-height:1.45}
+blockquote cite{font-style:normal;color:#9FB2B9;font-size:.95rem}
+.garantia{background:var(--latao);color:var(--ink);padding:28px 0;text-align:center;font-size:1.15rem}
+
+form{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:720px}
+label,.rotulo{display:flex;flex-direction:column;gap:6px;font-weight:500}
+input[type=text],input[type=date],select{font:inherit;padding:12px;border:1.5px solid var(--linha);border-radius:2px;background:#fff;color:var(--texto)}
+.cheio{grid-column:1/-1}
+form .chip{color:var(--ink);border-color:var(--ink)}
+form .chip:hover:not(:disabled),form .chip[aria-pressed=true]{background:var(--ink);color:#fff}
+.cupom{flex-direction:row;align-items:center;gap:10px;font-weight:400}
+#restam{margin:0;color:var(--alerta);font-weight:500;min-height:1.6em}
+#msg{margin:0;min-height:1.6em;color:var(--alerta);font-weight:500}
+details{border-bottom:1px solid var(--linha);padding:16px 0;max-width:720px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:10px 0 0;color:var(--cinza)}
+footer{background:var(--ink);color:#9FB2B9;padding:36px 0 96px;font-size:.95rem}
+footer p{margin:4px 0}
+.fixa{display:none}
+@media(max-width:760px){
+section{padding:52px 0}
+.hero{padding:48px 0 56px}
+.hero .wrap,.cards,.passos,.falas,form{grid-template-columns:1fr;gap:28px}
+form{gap:20px}
+.fixa{display:flex;gap:8px;position:fixed;left:0;right:0;bottom:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--ink);border-top:1px solid var(--latao);z-index:10}
+.fixa .btn{flex:1;padding:13px 8px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="aviso">Primeira visita? Ganhe <b>15% de desconto</b> com o código <b>ROCHA15</b>.</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>O corte que você leva a sério.</h1>
+      <p>Navalha, toalha quente e hora marcada. Sem fila, sem espera, sem improviso.</p>
+      <div class="acoes">
+        <a class="btn" href="#reservar">Reservar meu horário</a>
+        <a class="btn vazado" href="#pacotes">Ver pacotes</a>
+      </div>
+      <p class="prova"><b>4,9 de 5</b> em mais de 1.200 avaliações · atendimento só com hora marcada</p>
+    </div>
+    <aside class="agenda" aria-live="polite">
+      <h2>Próximos horários</h2>
+      <p id="quando">Carregando horários...</p>
+      <div class="chips" id="chipsHero"></div>
+      <p class="escassez" id="escHero"></p>
+    </aside>
+  </div>
+</header>
+
+<main>
+  <section id="pacotes">
+    <div class="wrap">
+      <h2>Escolha seu pacote</h2>
+      <p class="sub">Quem faz corte e barba juntos paga menos. Quem vem todo mês paga ainda menos.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Corte</h3>
+          <p class="preco">R$ 55</p>
+          <ul><li>Máquina ou tesoura</li><li>Lavagem e finalização</li></ul>
+          <button class="btn" data-servico="Corte">Reservar corte</button>
+        </article>
+        <article class="card destaque">
+          <span class="selo">Mais pedido</span>
+          <h3>Corte + barba</h3>
+          <p class="de">De R$ 95</p>
+          <p class="preco">R$ 85</p>
+          <p class="eco">Você economiza R$ 10</p>
+          <ul><li>Corte completo</li><li>Barba na navalha com toalha quente</li></ul>
+          <button class="btn" data-servico="Corte + barba">Reservar combo</button>
+        </article>
+        <article class="card">
+          <h3>Clube Rocha</h3>
+          <p class="preco">R$ 180 <small>/mês</small></p>
+          <p class="eco">4 cortes, economia de R$ 40</p>
+          <ul><li>Horário fixo toda semana</li><li>Prioridade na agenda</li></ul>
+          <button class="btn" data-servico="Clube Rocha (4 cortes por mês)">Entrar no clube</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="escuro">
+    <div class="wrap">
+      <h2>Quem vem, volta</h2>
+      <p class="sub">O que os clientes dizem depois da primeira visita.</p>
+      <div class="falas">
+        <blockquote><p>Cheguei na hora, sentei na hora e saí em 40 minutos. Nunca mais perdi uma manhã em barbearia.</p><cite>Rafael M., cliente há 2 anos</cite></blockquote>
+        <blockquote><p>A barba na navalha com toalha quente é outra coisa. Virei do Clube no primeiro mês.</p><cite>Diego S., assinante do Clube</cite></blockquote>
+        <blockquote><p>Reservei pelo celular em um minuto e o corte ficou exatamente como eu pedi.</p><cite>Thiago L., primeira visita</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <div class="garantia"><strong>Garantia Rocha:</strong> não gostou do resultado? Ajustamos de graça em até 7 dias.</div>
+
+  <section>
+    <div class="wrap">
+      <h2>Como funciona</h2>
+      <p class="sub">Da reserva à cadeira em três passos.</p>
+      <div class="passos">
+        <div><h3>1. Escolha o horário</h3><p>Veja só os horários que estão livres e toque no que combina com você.</p></div>
+        <div><h3>2. Confirme no WhatsApp</h3><p>Sua reserva chega pronta para a gente. Respondemos em minutos.</p></div>
+        <div><h3>3. Chegue e relaxe</h3><p>Seu horário é só seu. Sem fila e sem espera.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reservar" style="background:#fff">
+    <div class="wrap">
+      <h2>Reserve seu horário</h2>
+      <p class="sub">A agenda enche rápido nos fins de tarde e aos sábados.</p>
+      <form id="form" novalidate>
+        <label class="cheio">Seu nome<input id="nome" type="text" autocomplete="name"></label>
+        <label>Serviço
+          <select id="servico">
+            <option value="">Escolha um serviço</option>
+            <option>Corte</option>
+            <option>Corte + barba</option>
+            <option>Clube Rocha (4 cortes por mês)</option>
+            <option>Barba</option>
+          </select>
+        </label>
+        <label>Dia<input id="dia" type="date"></label>
+        <div class="rotulo cheio">Horário
+          <div class="chips" id="chips" role="group" aria-label="Horários"><span style="font-weight:400;color:var(--cinza)">Escolha o dia para ver os horários.</span></div>
+        </div>
+        <p id="restam" class="cheio"></p>
+        <label class="cheio cupom"><input id="cupom" type="checkbox"> É minha primeira visita (usar ROCHA15, 15% off)</label>
+        <p id="msg" class="cheio" role="status"></p>
+        <div class="cheio"><button class="btn" type="submit" style="background:var(--ink);color:#fff">Reservar pelo WhatsApp</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Perguntas frequentes</h2>
+      <p class="sub"></p>
+      <details><summary>Preciso pagar para reservar?</summary><p>Não. Você paga só no atendimento, no Pix, cartão ou dinheiro.</p></details>
+      <details><summary>E se eu precisar remarcar?</summary><p>Avise pelo WhatsApp até 2 horas antes e trocamos sem custo.</p></details>
+      <details><summary>Como funciona o Clube Rocha?</summary><p>São 4 cortes por mês com horário fixo na semana. Você cancela quando quiser.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:#fff">Barbearia Rocha</strong> · Rua das Tesouras, 123 · Centro</p>
+    <p>Terça a sexta, 9h às 20h · Sábado, 8h às 18h · Domingo e segunda, fechado</p>
+    <p>Projeto fictício criado para portfólio. Horários, avaliações e depoimentos são demonstrativos.</p>
+  </div>
+</footer>
+
+<div class="fixa">
+  <a class="btn" href="#reservar">Reservar horário</a>
+  <a class="btn vazado" id="zap" href="#" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<script>
+// Troque pelo seu número (DDI + DDD + número, só dígitos)
+const WHATSAPP = "5511999999999";
+document.getElementById("zap").href = "https://wa.me/" + WHATSAPP;
+
+const funcionamento = { 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 19], 6: [8, 17] };
+const agora = new Date();
+const iso = (d) => d.toLocaleDateString("en-CA");
+const dataDe = (s) => new Date(s + "T12:00:00");
+
+// Ocupação demonstrativa: depende do dia e da hora, então parece uma agenda real
+const ocupado = (d, h) => (h * 7 + d.getDate() * 13) % 5 < 2;
+const passou = (d, h) => iso(d) === iso(agora) && h <= agora.getHours();
+const livre = (d, h) => !ocupado(d, h) && !passou(d, h);
+
+function horas(d) {
+  const f = funcionamento[d.getDay()];
+  if (!f) return [];
+  const lista = [];
+  for (let h = f[0]; h <= f[1]; h++) lista.push(h);
+  return lista;
+}
+
+function chip(texto, desabilitado, aoClicar) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "chip";
+  b.textContent = texto;
+  b.disabled = desabilitado;
+  b.setAttribute("aria-pressed", "false");
+  if (aoClicar) b.addEventListener("click", () => aoClicar(b));
+  return b;
+}
+
+const dia = document.getElementById("dia");
+const servico = document.getElementById("servico");
+const chipsForm = document.getElementById("chips");
+const restam = document.getElementById("restam");
+const msg = document.getElementById("msg");
+let horaEscolhida = "";
+dia.min = iso(agora);
+
+function desenharHorarios() {
+  chipsForm.innerHTML = "";
+  restam.textContent = "";
+  horaEscolhida = "";
+  if (!dia.value) return;
+  const d = dataDe(dia.value);
+  const todas = horas(d);
+  if (!todas.length) {
+    chipsForm.textContent = "Fechado nesse dia. Escolha de terça a sábado.";
+    return;
+  }
+  const livres = todas.filter((h) => livre(d, h));
+  todas.forEach((h) => {
+    chipsForm.appendChild(chip(h + "h", !livre(d, h), (b) => {
+      chipsForm.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", "false"));
+      b.setAttribute("aria-pressed", "true");
+      horaEscolhida = h + "h";
+    }));
+  });
+  restam.textContent = livres.length
+    ? `Restam só ${livres.length} de ${todas.length} horários neste dia.`
+    : "Dia lotado. Escolha outro dia.";
+}
+dia.addEventListener("change", desenharHorarios);
+
+// Reserva rápida: leva dia e hora para o formulário
+function reservar(d, h) {
+  dia.value = iso(d);
+  desenharHorarios();
+  [...chipsForm.children].find((c) => c.textContent === h + "h")?.click();
+  document.getElementById("reservar").scrollIntoView();
+}
+
+// Cartão do hero: próximo dia com horários livres
+(function heroAgenda() {
+  const nomes = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+  for (let i = 0; i < 8; i++) {
+    const d = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate() + i, 12);
+    const l = horas(d).filter((h) => livre(d, h));
+    if (!l.length) continue;
+    const quando = i === 0 ? "hoje" : i === 1 ? "amanhã" : nomes[d.getDay()];
+    document.getElementById("quando").textContent = "Toque para reservar. Horários livres " + (i < 2 ? quando : "na " + quando) + ":";
+    l.slice(0, 5).forEach((h) => document.getElementById("chipsHero").appendChild(chip(h + "h", false, () => reservar(d, h))));
+    document.getElementById("escHero").textContent = l.length <= 4
+      ? `Últimos ${l.length} horários ${i < 2 ? quando : "de " + quando}.`
+      : `Restam ${l.length} horários ${i < 2 ? quando : "na " + quando}.`;
+    return;
+  }
+})();
+
+// Botões dos pacotes
+document.querySelectorAll("[data-servico]").forEach((b) =>
+  b.addEventListener("click", () => {
+    servico.value = b.dataset.servico;
+    document.getElementById("reservar").scrollIntoView();
+  })
+);
+
+document.getElementById("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const nome = document.getElementById("nome").value.trim();
+  if (!nome || !servico.value || !dia.value || !horaEscolhida) {
+    msg.textContent = "Preencha nome, serviço, dia e horário para reservar.";
+    return;
+  }
+  msg.textContent = "";
+  const [a, m, d] = dia.value.split("-");
+  const cupom = document.getElementById("cupom").checked ? " Primeira visita, com o código ROCHA15." : "";
+  const texto = `Olá! Sou ${nome} e quero reservar: ${servico.value}, dia ${d}/${m}/${a} às ${horaEscolhida}.${cupom}`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
+});
+</script>
+</body>
+</html>
